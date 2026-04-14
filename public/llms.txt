@@ -1,0 +1,51 @@
+# Business — Generative Engine Optimization Map
+
+---
+
+## Pages
+
+### בית
+https://example.com
+גלו את עולם מערכות הזכוכית ללא מסגרת: חלונות נאספים, חלונות אקורדיון ופרגולות ביוקלימטיות. עיצוב מינימליסטי שמוחק את הגבול בין פנים לחוץ. קבלו הצעה עכשיו.
+
+### מערכות ללא מסגרת
+https://example.com/frameless-systems
+מערכות ללא מסגרת מהמתקדמות בישראל: חלונות נאספים, זכוכיות מתקפלות וחלונות הזזה שקופים לחלוטין. ממקסמים אור, נוף וחוויה אדריכלית. גלו את הקולקציה המלאה.
+
+### פרגולות ביוקלימטיות
+https://example.com/bioclimatic-pergolas
+פרגולות ביוקלימטיות חשמליות שמתאימות את עצמן לכל עונה: שמש, גשם או רוח. שלבו אותן עם חלונות אקורדיון ליצירת מרחב מגורים חיצוני מושלם כל השנה.
+
+### פרויקטים
+https://example.com/projects
+גלרית פרויקטים אמיתיים: בתים פרטיים, מרפסות ומבנים מסחריים שהפכו לחלל אדריכלי עם חלונות נאספים וזכוכיות מתקפלות. תנו לתמונות לספר את הסיפור.
+
+### צור קשר
+https://example.com/contact
+רוצים להתקין חלונות אקורדיון, מערכת ללא מסגרת או פרגולה ביוקלימטית? צרו קשר עם המומחים של וילון גלאס לייעוץ אישי, מדידה והצעת מחיר ללא עלות.
+
+## Legal & Policy
+
+### Privacy Policy
+https://example.com/privacy
+Information about how user data is collected, stored, and protected.
+
+### Terms & Conditions
+https://example.com/terms
+Legal terms describing service usage, rights, and policies.
+
+### Accessibility Statement
+https://example.com/accessibility
+Information about WCAG compliance and accessibility features.
+
+---
+
+# Business Context (for LLM understanding)
+
+## About Business
+---
+
+# Additional Resources
+
+- **Sitemap**: https://example.com/sitemap.xml
+- **Robots.txt**: https://example.com/robots.txt

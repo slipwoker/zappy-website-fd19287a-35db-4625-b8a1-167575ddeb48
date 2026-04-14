@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>פתחו את הקיר כולו עם זכוכיות מתקפלות — וילון גלאס Vilon Glass</title>
+    <meta name="description" content="מערכות ללא מסגרת מהמתקדמות בישראל: חלונות נאספים, זכוכיות מתקפלות וחלונות הזזה שקופים לחלוטין. ממקסמים אור, נוף וחוויה אדריכלית. גלו את הקולקציה המלאה.">
+    <meta name="keywords" content="זכוכיות מתקפלות, חלונות נאספים, חלונות הזזה ללא מסגרת, מערכות זכוכית אדריכליות">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'fd19287a-35db-4625-b8a1-167575ddeb48',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+    <meta property="og:title" content="פתחו את הקיר כולו עם זכוכיות מתקפלות — וילון גלאס Vilon Glass">
+  <meta property="og:description" content="מערכות ללא מסגרת מהמתקדמות בישראל: חלונות נאספים, זכוכיות מתקפלות וחלונות הזזה שקופים לחלוטין. ממקסמים אור, נוף וחוויה אדריכלית. גלו את הקולקציה המלאה.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="פתחו את הקיר כולו עם זכוכיות מתקפלות — וילון גלאס Vilon Glass">
+  <meta name="twitter:description" content="מערכות ללא מסגרת מהמתקדמות בישראל: חלונות נאספים, זכוכיות מתקפלות וחלונות הזזה שקופים לחלוטין. ממקסמים אור, נוף וחוויה אדריכלית. גלו את הקולקציה המלאה.">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: var(--text-dark, #333) !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus (exclude catalog sub-menus that use <a> children instead of <li>) */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))):not(:has(> a)), .sub-menu:not(:has(li)):not(:has(> a)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 60vh !important; overflow-y: auto !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; position: relative !important; min-height: 44px !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; min-width: 0 !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; min-width: 0 !important; padding: 0 !important; line-height: inherit !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu, .navbar li:has(.sub-menu) > .sub-menu, #navMenu li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: auto !important; background: transparent !important; border: none !important; cursor: pointer !important; color: var(--text-dark) !important; position: static !important; flex-shrink: 0 !important; align-self: stretch !important; z-index: 2 !important; padding: 0 !important; margin: 0 !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; color: var(--text-dark) !important; }
+        .navbar .sub-menu li a, nav.navbar .sub-menu li a, .zappy-products-dropdown .sub-menu a { color: var(--text-dark) !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+
+    <style id="mobile-lang-menu-deployed-css">
+    @media (max-width: 768px) {
+      .lang-switcher,
+      .nav-cta-container .lang-switcher,
+      .nav-container .lang-switcher,
+      .navbar .lang-switcher,
+      .navbar .nav-cta-container .lang-switcher,
+      .nav-icons-left .lang-switcher,
+      .nav-ecommerce-icons .lang-switcher { display: none !important; }
+      .mobile-lang-menu { width: 100%; border-top: 1px solid rgba(128,128,128,0.2); padding: 8px 0 0 0; margin-top: 8px; }
+      .mobile-lang-toggle { display: flex !important; align-items: center; justify-content: space-between; width: 100%; padding: 12px 16px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; font-family: inherit; }
+      .mobile-lang-toggle::after { content: ''; display: inline-block; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform 0.3s ease; margin-left: 8px; }
+      .mobile-lang-toggle.expanded::after { transform: rotate(-135deg); }
+      .mobile-lang-options { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+      .mobile-lang-options.expanded { max-height: 300px; }
+      .mobile-lang-option { display: flex !important; align-items: center; gap: 10px; padding: 10px 24px; text-decoration: none; color: inherit; font-size: 14px; font-family: inherit; }
+      .mobile-lang-option:hover { background: rgba(128,128,128,0.1); }
+      .mobile-lang-option.active { font-weight: 600; opacity: 0.7; pointer-events: none; }
+      .mobile-lang-option img { width: 20px; height: 20px; border-radius: 50%; }
+    }
+    @media (min-width: 769px) {
+      .mobile-lang-menu { display: none !important; }
+    }
+    </style>
+
+    <style id="zappy-widget-visibility">
+      #mic-access-tool-general-button, .mic-access-tool-general-button,
+      #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+      ._access-icon, #mic-access-tool-box, .mic-access-tool-box,
+      #mic-init-access-tool #mic-access-tool-box, div[id*="mic-access-tool-box"], ._access-menu {
+        display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+      }
+    </style>
+</head>
+<body>
+
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+
+  <button class="phone-header-btn" data-phone="" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+
+  <div class="nav-container">
+    <div class="nav-right-group"><div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/vilon-glass-logo.webp" alt="וילון גלאס Vilon Glass" class="logo">
+      </a>
+    </div><ul class="nav-menu" id="navMenu"><li><a href="/frameless-systems">מערכות ללא מסגרת</a></li><li><a href="/bioclimatic-pergolas">פרגולות ביוקלימטיות</a></li><li><a href="/projects">פרויקטים</a></li></ul></div>
+
+    
+
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">צור קשר</a>
+    </div>
+  </div>
+</nav>
+<script>
+
+// Navbar Mobile Menu Toggle and Contrast Fix
+(function() {
+  // Use 'load' event instead of 'DOMContentLoaded' to ensure we run AFTER all other scripts
+  window.addEventListener('load', function() {
+    
+    // FIX MOBILE BUTTON CONTRAST
+    // Detect navbar background color and apply contrasting color to mobile buttons
+    const navbar = document.querySelector('.navbar, nav, header');
+    if (!navbar) {
+      console.log('[Navbar] Navbar element not found');
+      return;
+    }
+    
+    // DECLARE VARIABLES EARLY to avoid Temporal Dead Zone errors
+    // These are used in multiple places below
+    let mobileToggle = document.getElementById('mobileToggle') ||
+                       document.querySelector('.mobile-toggle') ||
+                       document.querySelector('.hamburger') ||
+                       document.querySelector('.hamburger-menu') ||
+                       document.querySelector('.menu-toggle') ||
+                       document.querySelector('.burger-menu') ||
+                       document.querySelector('[aria-label="Menu"]') ||
+                       document.querySelector('[aria-label="תפריט"]');
+    
+    const phoneBtn = document.querySelector('.phone-header-btn');
+    
+    const computedStyle = window.getComputedStyle(navbar);
+    let bgColor = computedStyle.backgroundColor;
+    
+    console.log('[Navbar] Initial navbar background:', bgColor);
+    
+    // Check if background is transparent or rgba with 0 alpha
+    const isTransparent = bgColor === 'transparent' || 
+                         bgColor === 'rgba(0, 0, 0, 0)' ||
+                         (bgColor.startsWith('rgba') && bgColor.includes(', 0)'));
+    
+    if (isTransparent) {
+      // Check for background-image or gradient
+      const bgImage = computedStyle.backgroundImage;
+      if (bgImage && bgImage !== 'none') {
+        console.log('[Navbar] Navbar has background image/gradient, using dark text');
+        bgColor = 'rgb(240, 240, 240)'; // Assume light background
+      } else {
+        // Transparent navbar - check body background
+        const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+        console.log('[Navbar] Navbar transparent, using body background:', bodyBg);
+        bgColor = bodyBg;
+      }
+    }
+    
+    // Calculate luminance to determine if background is light or dark
+    const rgb = bgColor.match(/\d+/g);
+    if (rgb && rgb.length >= 3) {
+      const r = parseInt(rgb[0]);
+      const g = parseInt(rgb[1]);
+      const b = parseInt(rgb[2]);
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      
+      // Mobile button colors are set by Claude's AI-generated CSS (same as .nav-menu a)
+      // No dynamic color overrides needed - colors come from the generated navbar CSS
+      console.log('[Navbar] Mobile button colors preserved from Claude CSS (luminance:', luminance.toFixed(2) + ')');
+      
+      // FIX ICON SIZES - Ensure SVGs are properly sized and visible
+      // INJECT CRITICAL CSS TO OVERRIDE ANY CONFLICTING RULES
+      const criticalCSS = document.createElement('style');
+      criticalCSS.id = 'zappy-mobile-nav-fix';
+      const htmlLang = document.documentElement.lang || 'en';
+      const htmlDir = document.documentElement.dir || 'ltr';
+      // Check both dir attribute AND lang for RTL detection
+      // dir="rtl" is the most reliable indicator
+      const isRTL = htmlDir === 'rtl' || htmlLang === 'he' || htmlLang === 'ar';
+      
+      criticalCSS.textContent = `
+        /* Hide mobile buttons on desktop, show only on mobile */
+        @media (min-width: 769px) {
+          .mobile-toggle,
+          .phone-header-btn {
+            display: none !important;
+          }
+        }
+        
+        /* Show and position mobile buttons correctly on mobile */
+        @media (max-width: 768px) {
+          .mobile-toggle,
+          .phone-header-btn {
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 1001 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 36px !important;
+            height: 36px !important;
+            border-radius: 50% !important;
+            border: none !important;
+            cursor: pointer !important;
+            padding: 6px !important;
+            background: none !important;
+            color: var(--nav-text, var(--text-dark)) !important;
+          }
+          
+          /* LTR positioning (default): hamburger LEFT, phone RIGHT */
+          html:not([dir="rtl"]):not([lang="he"]):not([lang="ar"]) .mobile-toggle,
+          html[dir="ltr"] .mobile-toggle {
+            left: 12px !important;
+            right: auto !important;
+          }
+          html:not([dir="rtl"]):not([lang="he"]):not([lang="ar"]) .phone-header-btn,
+          html[dir="ltr"] .phone-header-btn {
+            right: 12px !important;
+            left: auto !important;
+          }
+          
+          /* RTL positioning: hamburger RIGHT, phone LEFT */
+          html[dir="rtl"] .mobile-toggle,
+          html[lang="he"] .mobile-toggle,
+          html[lang="ar"] .mobile-toggle {
+            right: 12px !important;
+            left: auto !important;
+          }
+          html[dir="rtl"] .phone-header-btn,
+          html[lang="he"] .phone-header-btn,
+          html[lang="ar"] .phone-header-btn {
+            left: 12px !important;
+            right: auto !important;
+          }
+          
+          /* CRITICAL: Ensure nav-container has min-height on mobile */
+          /* All children are positioned absolutely/fixed on mobile, so height:auto collapses to 0 */
+          .nav-container {
+            min-height: 70px !important;
+            position: relative !important;
+          }
+          
+          /* Ensure SVG icons are properly sized and inherit color */
+          .mobile-toggle svg,
+          .phone-header-btn svg {
+            width: 24px !important;
+            height: 24px !important;
+            /* Don't force display - let JavaScript control hamburger/close toggle */
+          }
+          
+          /* Reset nav-cta-container on mobile - remove desktop box-shadow/padding */
+          /* that creates a visible ghost box when CTA button is hidden */
+          .nav-cta-container {
+            box-shadow: none !important;
+            padding: 0 !important;
+          }
+          
+          /* Hide nav-cta-container entirely on mobile when there's no lang-switcher */
+          /* (only the CTA button is inside, and it's hidden on mobile) */
+          .nav-cta-container:not(:has(.lang-switcher)) {
+            display: none !important;
+          }
+          
+          /* CRITICAL: Prevent hero image fade gradient from bleeding over headline text */
+          /* The .image-fade-gradient has bottom: -30px (extends below parent) */
+          /* On mobile stacked layout, this overlaps the h1 text below the image */
+          .hero-image-column {
+            overflow: hidden !important;
+          }
+          .image-fade-gradient {
+            bottom: 0 !important;
+          }
+          
+          /* Hide desktop language switcher on mobile - hamburger menu handles it */
+          /* High specificity to override stored CSS */
+          .lang-switcher,
+          .nav-cta-container .lang-switcher,
+          .nav-container .lang-switcher,
+          .navbar .lang-switcher,
+          .navbar .nav-cta-container .lang-switcher {
+            display: none !important;
+          }
+        }
+      `;
+      
+      // Remove existing fix if present and inject new one
+      const existing = document.getElementById('zappy-mobile-nav-fix');
+      if (existing) existing.remove();
+      document.head.appendChild(criticalCSS);
+      
+      console.log('[Navbar] Critical CSS injected for mobile nav positioning');
+      
+      // ONLY apply inline positioning styles on mobile viewport
+      // On desktop, the CSS handles hiding these buttons with display: none
+      // Inline styles were breaking desktop layout by overriding CSS
+      const isMobileViewport = window.innerWidth <= 768;
+      
+      if (mobileToggle) {
+        // Icon sizing applies to all viewports for consistency
+        const hamburgerIcon = mobileToggle.querySelector('.hamburger-icon');
+        const closeIcon = mobileToggle.querySelector('.close-icon');
+        
+        if (hamburgerIcon) {
+          hamburgerIcon.style.setProperty('width', '24px', 'important');
+          hamburgerIcon.style.setProperty('height', '24px', 'important');
+          hamburgerIcon.style.setProperty('display', 'block', 'important'); // Show hamburger by default
+        }
+        if (closeIcon) {
+          closeIcon.style.setProperty('width', '24px', 'important');
+          closeIcon.style.setProperty('height', '24px', 'important');
+          closeIcon.style.setProperty('display', 'none', 'important'); // Hide close icon by default
+        }
+        
+        // ONLY set positioning inline styles on mobile
+        if (isMobileViewport) {
+          mobileToggle.style.setProperty('position', 'absolute', 'important');
+          mobileToggle.style.setProperty('top', '50%', 'important');
+          mobileToggle.style.setProperty('transform', 'translateY(-50%)', 'important');
+          mobileToggle.style.setProperty('z-index', '1001', 'important');
+          
+          // Clear any inline left/right so CSS can take over based on html[dir]
+          mobileToggle.style.removeProperty('left');
+          mobileToggle.style.removeProperty('right');
+          
+          console.log('[Navbar] Mobile toggle positioning applied (mobile viewport)');
+        } else {
+          // On desktop, clear any positioning styles to let CSS handle it
+          mobileToggle.style.removeProperty('position');
+          mobileToggle.style.removeProperty('top');
+          mobileToggle.style.removeProperty('transform');
+          mobileToggle.style.removeProperty('z-index');
+          mobileToggle.style.removeProperty('left');
+          mobileToggle.style.removeProperty('right');
+          console.log('[Navbar] Desktop viewport - cleared mobile toggle inline positioning');
+        }
+      }
+      
+      if (phoneBtn) {
+        // Icon sizing applies to all viewports
+        const phoneIcon = phoneBtn.querySelector('svg');
+        if (phoneIcon) {
+          phoneIcon.style.width = '24px';
+          phoneIcon.style.height = '24px';
+          phoneIcon.setAttribute('width', '24');
+          phoneIcon.setAttribute('height', '24');
+        }
+        
+        // ONLY set positioning inline styles on mobile
+        if (isMobileViewport) {
+          phoneBtn.style.setProperty('position', 'absolute', 'important');
+          phoneBtn.style.setProperty('top', '50%', 'important');
+          phoneBtn.style.setProperty('transform', 'translateY(-50%)', 'important');
+          phoneBtn.style.setProperty('z-index', '1001', 'important');
+          
+          // Clear any inline left/right so CSS can take over based on html[dir]
+          phoneBtn.style.removeProperty('left');
+          phoneBtn.style.removeProperty('right');
+          
+          console.log('[Navbar] Phone button positioning applied (mobile viewport)');
+        } else {
+          // On desktop, clear any positioning styles to let CSS handle it
+          phoneBtn.style.removeProperty('position');
+          phoneBtn.style.removeProperty('top');
+          phoneBtn.style.removeProperty('transform');
+          phoneBtn.style.removeProperty('z-index');
+          phoneBtn.style.removeProperty('left');
+          phoneBtn.style.removeProperty('right');
+          console.log('[Navbar] Desktop viewport - cleared phone button inline positioning');
+        }
+      }
+    } else {
+      console.log('[Navbar] Could not parse background color:', bgColor);
+    }
+    
+    // MOBILE MENU TOGGLE
+    // Re-query in case DOM changed (mobileToggle already declared at top of function)
+    mobileToggle = document.getElementById('mobileToggle') ||
+                   document.querySelector('.mobile-toggle') ||
+                   document.querySelector('.hamburger') ||
+                   document.querySelector('.hamburger-menu') ||
+                   document.querySelector('.menu-toggle') ||
+                   document.querySelector('.burger-menu') ||
+                   document.querySelector('[aria-label="Menu"]') ||
+                   document.querySelector('[aria-label="תפריט"]');
+    
+    // EXPANDED SEARCH: Find nav menu by ID or class
+    const navMenu = document.getElementById('navMenu') ||
+                  document.querySelector('.nav-menu') ||
+                  document.querySelector('.nav-links') ||
+                  document.querySelector('nav ul:not(.submenu)');
+    
+    if (!mobileToggle || !navMenu) {
+      console.log('[Navbar] Mobile toggle or menu not found:', { toggle: !!mobileToggle, menu: !!navMenu });
+      return;
+    }
+    
+    // Ensure navMenu has ID for CSS targeting
+    if (!navMenu.id) {
+      navMenu.id = 'navMenu';
+    }
+    
+    console.log('[Navbar] Initializing mobile menu...');
+    
+    // Remove any existing event listeners by cloning the button
+    const newToggle = mobileToggle.cloneNode(true);
+    mobileToggle.parentNode.replaceChild(newToggle, mobileToggle);
+    
+    // Toggle menu on button click - use newToggle now
+    newToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const hamburgerIcon = this.querySelector('.hamburger-icon');
+      const closeIcon = this.querySelector('.close-icon');
+      const isActive = navMenu.classList.contains('active');
+      
+      if (isActive) {
+        // Close menu
+        navMenu.classList.remove('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'block', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+        console.log('[Navbar] Menu closed');
+      } else {
+        // Open menu
+        navMenu.classList.add('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'none', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'block', 'important');
+        document.body.style.overflow = 'hidden';
+        console.log('[Navbar] Menu opened');
+      }
+    });
+    
+    // Close menu when clicking nav links (but NOT dropdown toggles)
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        // Don't close if it's a dropdown child (unless it's a real navigation link)
+        if (this.getAttribute('href') === '#') return;
+        
+        const hamburgerIcon = newToggle.querySelector('.hamburger-icon');
+        const closeIcon = newToggle.querySelector('.close-icon');
+        
+        navMenu.classList.remove('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'block', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+        console.log('[Navbar] Menu closed (link clicked)');
+      });
+    });
+    
+    // DROPDOWN MENU TOGGLE (for mobile and touch devices)
+    var dropdownToggles = navMenu.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(function(toggle) {
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var parent = this.closest('.nav-dropdown');
+        if (!parent) return;
+        
+        // Close other open dropdowns at the same level
+        var siblings = parent.parentNode.querySelectorAll('.nav-dropdown.open');
+        siblings.forEach(function(sib) {
+          if (sib !== parent) sib.classList.remove('open');
+        });
+        
+        parent.classList.toggle('open');
+        console.log('[Navbar] Dropdown toggled:', parent.classList.contains('open') ? 'open' : 'closed');
+      });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        var openDropdowns = document.querySelectorAll('.nav-dropdown.open');
+        openDropdowns.forEach(function(dd) { dd.classList.remove('open'); });
+      }
+    });
+    
+    console.log('[Navbar] Dropdown handlers initialized for ' + dropdownToggles.length + ' dropdowns');
+    
+    // Phone button functionality (phoneBtn already declared at top of function)
+    if (phoneBtn) {
+      phoneBtn.addEventListener('click', function() {
+        // Get phone number from placeholder in page or use default
+        const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+        const phoneNumber = phoneLinks.length > 0 
+          ? phoneLinks[0].getAttribute('href').replace('tel:', '')
+          : '[business_phone]';
+        
+        window.location.href = 'tel:' + phoneNumber;
+        console.log('[Navbar] Phone button clicked');
+      });
+    }
+    
+    console.log('[Navbar] Mobile menu initialized successfully');
+    
+    // === WHATSAPP BUTTON VISIBILITY FIX ===
+    // Ensure WhatsApp floating button is hidden on desktop and visible on mobile
+    // IMPORTANT: Only target the floating button by its class, NOT generic wa.me links
+    const handleWhatsAppVisibility = function() {
+      const whatsappBtn = document.querySelector('.whatsapp-float');
+      if (whatsappBtn) {
+        const isDesktop = window.innerWidth >= 769;
+        if (isDesktop) {
+          whatsappBtn.style.setProperty('display', 'none', 'important');
+          whatsappBtn.style.setProperty('visibility', 'hidden', 'important');
+          whatsappBtn.style.setProperty('opacity', '0', 'important');
+          whatsappBtn.style.setProperty('pointer-events', 'none', 'important');
+          console.log('[WhatsApp] Button hidden on desktop');
+        } else {
+          whatsappBtn.style.removeProperty('display');
+          whatsappBtn.style.removeProperty('visibility');
+          whatsappBtn.style.removeProperty('opacity');
+          whatsappBtn.style.removeProperty('pointer-events');
+          console.log('[WhatsApp] Button visible on mobile');
+        }
+      }
+    };
+    
+    // Run on load
+    handleWhatsAppVisibility();
+    
+    // Run on resize with debouncing
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(handleWhatsAppVisibility, 100);
+    });
+  });
+})();
+
+</script>
+  
+  <main>
+    <section class="frameless-systems-intro-section" data-layout-spec="מערכות ללא מסגרת-intro" dir="rtl">
+  <div class="fsintro-container">
+    <div class="fsintro-grid">
+
+      <!-- Text Side (START = RIGHT in RTL) -->
+      <div class="fsintro-text-col">
+        <div class="fsintro-eyebrow">
+          <span class="fsintro-eyebrow-line"></span>
+          <span class="fsintro-eyebrow-label">מערכות זכוכית ואלומיניום</span>
+        </div>
+
+        <h1 class="fsintro-h1">מערכות ללא מסגרת —<br>שקיפות ללא גבולות</h1>
+
+        <p class="fsintro-lead">וילון גלאס מתמחה בפתרונות זיגוג אדריכלי מהמחלקה הגבוהה: <span class="fsintro-accent">חלונות נאספים ומתקפלים ללא מסגרת</span>, וילון זכוכית מסוג אקורדיון, וחלונות הזזה פריימלס — כולם מאופיינים באסתטיקה נקייה ונטולת מסגרות המקסמת נוף ואור טבעי.</p>
+
+        <p class="fsintro-body">כל מערכת מתוכננת לאפשר מעבר חלק בין פנים לחוץ, תוך שמירה על דיוק הנדסי, עמידות לאורך שנים, ועיצוב מינימליסטי שמשרת את האדריכלות — לא מתחרה בה.</p>
+
+        <div class="fsintro-tags">
+          <span class="fsintro-tag">חלונות נאספים</span>
+          <span class="fsintro-tag">וילון זכוכית</span>
+          <span class="fsintro-tag">חלונות הזזה פריימלס</span>
+          <span class="fsintro-tag">זכוכיות מתקפלות</span>
+        </div>
+
+        <div class="fsintro-baseline-rule"></div>
+
+        <div class="fsintro-stats">
+          <div class="fsintro-stat">
+            <span class="fsintro-stat-number">15+</span>
+            <span class="fsintro-stat-label">שנות ניסיון</span>
+          </div>
+          <div class="fsintro-stat-divider"></div>
+          <div class="fsintro-stat">
+            <span class="fsintro-stat-number">500+</span>
+            <span class="fsintro-stat-label">פרויקטים</span>
+          </div>
+          <div class="fsintro-stat-divider"></div>
+          <div class="fsintro-stat">
+            <span class="fsintro-stat-number">100%</span>
+            <span class="fsintro-stat-label">ללא מסגרת</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Side (END = LEFT in RTL) -->
+      <div class="fsintro-image-col">
+        <div class="fsintro-image-wrapper">
+          <img data-placeholder="frameless-systems-intro-image-1" data-context="Tall architectural interior photograph showing a premium frameless folding glass wall system fully opened, flooding a modern living room with bright daylight. The glass panels are completely borderless with minimal hardware, offering an unobstructed panoramic view to a lush outdoor terrace. Clean white walls, polished concrete floor, and natural light create a serene, gallery-like atmosphere. No frames, no visible tracks — pure transparency and precision craftsmanship." width="620" height="820" src="/assets/site-frameless-systems-intro-image-1.webp" alt="מערכת חלונות נאספים ללא מסגרת — נוף פנורמי ואור טבעי" class="fsintro-main-image">
+          <div class="fsintro-image-caption">
+            <span class="fsintro-caption-line"></span>
+            <span class="fsintro-caption-text">חלונות נאספים ללא מסגרת — פרויקט מגורים, 2024</span>
+          </div>
+          <div class="fsintro-image-badge">
+            <span>פריימלס</span>
+            <span>Frameless</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Divider -->
+  <div class="fsintro-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,56 L0,32 L120,36 L240,28 L360,34 L480,26 L600,32 L720,28 L840,34 L960,26 L1080,32 L1200,28 L1320,34 L1440,30 L1440,56 Z" fill="#FBFBF8" opacity="0.6"></path>
+      <line x1="0" y1="32" x2="240" y2="32" stroke="#DCD6CC" stroke-width="1"></line>
+      <line x1="360" y1="32" x2="720" y2="32" stroke="#DCD6CC" stroke-width="1"></line>
+      <line x1="840" y1="32" x2="1200" y2="32" stroke="#DCD6CC" stroke-width="1"></line>
+      <line x1="1320" y1="32" x2="1440" y2="32" stroke="#DCD6CC" stroke-width="1"></line>
+      <circle cx="240" cy="32" r="3" fill="#C89B3C" opacity="0.7"></circle>
+      <circle cx="720" cy="32" r="3" fill="#C89B3C" opacity="0.7"></circle>
+      <circle cx="1200" cy="32" r="3" fill="#C89B3C" opacity="0.7"></circle>
+    </svg>
+  </div>
+
+</section>
+
+<section class="frameless-systems-product-families-section" data-layout-spec="מערכות ללא מסגרת-product-families" dir="rtl">
+  <div class="pf-container">
+    <div class="pf-header">
+      <p class="pf-label">המערכות שלנו</p>
+      <h2 class="pf-title">חלונות נאספים ומערכות זכוכית ללא מסגרת</h2>
+      <p class="pf-subtitle">ארבע משפחות מוצר מובילות, כל אחת מתוכננת להעלים את הגבול בין פנים לחוץ — בדיוק אדריכלי ובאסתטיקה נקייה ללא פשרות.</p>
+    </div>
+    <div class="pf-grid">
+
+      <!-- Card 1: Folding Windows -->
+      <article class="pf-card">
+        <figure class="pf-card-image-wrap">
+          <img data-placeholder="frameless-systems-product-families-image-1" data-context="Luxury frameless folding glass windows fully open on a modern penthouse balcony, panels folded completely to the side revealing unobstructed panoramic city view, no visible frames or borders, minimalist architecture, natural daylight, clean white interior" width="600" height="400" src="/assets/site-frameless-systems-product-families-image-1.webp" alt="חלונות מתקפלים ללא מסגרת — מרפסת עם נוף פתוח">
+        </figure>
+        <div class="pf-card-body">
+          <div class="pf-card-tag">חלונות מתקפלים</div>
+          <h3 class="pf-card-title">חלונות נאספים מתקפלים</h3>
+          <p class="pf-card-desc">פתרון אלגנטי למרפסות, חזיתות ומרחבי מגורים המבקשים פתיחות מרבית. הפאנלים מתקפלים לחלוטין לצד אחד ומשחררים את כל פתח החלון — ללא עמודים, ללא הפרעה לנוף.</p>
+          <div class="pf-card-mechanic">
+            <span class="pf-mechanic-icon" aria-hidden="true">
+              <svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9h12M10 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <span>פתיחה: קיפול לרוחב — עד 100% פתח פנוי</span>
+          </div>
+          <div class="pf-card-uses">
+            <span class="pf-use-tag">מרפסות</span>
+            <span class="pf-use-tag">חזיתות</span>
+            <span class="pf-use-tag">חדרי שמש</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Stacking Windows -->
+      <article class="pf-card">
+        <figure class="pf-card-image-wrap">
+          <img data-placeholder="frameless-systems-product-families-image-2" data-context="Modern frameless stacking glass window system on a villa patio, glass panels sliding and stacking neatly to one side, seamless connection between indoor living room and outdoor garden, no visible aluminum frames, clean minimalist design, warm afternoon light" width="600" height="400" src="/assets/site-frameless-systems-product-families-image-2.webp" alt="חלונות נאספים הזזה — חיבור חלק בין פנים לחוץ">
+        </figure>
+        <div class="pf-card-body">
+          <div class="pf-card-tag">חלונות נאספים</div>
+          <h3 class="pf-card-title">חלונות הזזה נאספים</h3>
+          <p class="pf-card-desc">פאנלי זכוכית הנעים על מסלול ונאספים בחבילה אחת דקה בקצה הפתח. מתאים במיוחד לחיבור בין סלון לגינה, פטיו מרווח, או כניסות ייצוגיות — עם מינימום מסגרת ומקסימום אור.</p>
+          <div class="pf-card-mechanic">
+            <span class="pf-mechanic-icon" aria-hidden="true">
+              <svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9h12M10 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <span>פתיחה: הזזה ואיסוף לצד — מסלול חד-שלבי</span>
+          </div>
+          <div class="pf-card-uses">
+            <span class="pf-use-tag">פטיו</span>
+            <span class="pf-use-tag">גינות</span>
+            <span class="pf-use-tag">כניסות</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Curtain Accordion Glass -->
+      <article class="pf-card">
+        <figure class="pf-card-image-wrap">
+          <img data-placeholder="frameless-systems-product-families-image-3" data-context="Frameless glass curtain accordion system enclosing an upscale restaurant terrace, glass panels in accordion fold configuration, completely transparent with no visible frames, guests dining with full view of outdoor scenery, evening warm lighting, luxury hospitality setting" width="600" height="400" src="/assets/site-frameless-systems-product-families-image-3.webp" alt="וילון זכוכית אקורדיון — סגירת מרפסת מסעדה">
+        </figure>
+        <div class="pf-card-body">
+          <div class="pf-card-tag">וילון זכוכית</div>
+          <h3 class="pf-card-title">וילון זכוכית — אקורדיון</h3>
+          <p class="pf-card-desc">מערכת ה"אקורדיון" הקלאסית של וילון גלאס: פאנלי זכוכית המתקפלים כמו מפוח ויוצרים מחיצה שקופה ורציפה. פתרון אידיאלי לסגירת מרחבי אירוח, מסעדות, בתי קפה וחללים מסחריים — ללא עמודי ביניים.</p>
+          <div class="pf-card-mechanic">
+            <span class="pf-mechanic-icon" aria-hidden="true">
+              <svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9h12M10 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <span>פתיחה: קיפול אקורדיון — ציר אנכי לכל פאנל</span>
+          </div>
+          <div class="pf-card-uses">
+            <span class="pf-use-tag">מסעדות</span>
+            <span class="pf-use-tag">אירוח</span>
+            <span class="pf-use-tag">חללים מסחריים</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4: Frameless Sliding -->
+      <article class="pf-card">
+        <figure class="pf-card-image-wrap">
+          <img data-placeholder="frameless-systems-product-families-image-4" data-context="Premium frameless sliding glass window system in a modern winter room or sunroom, large single glass panels sliding smoothly with no visible frames or borders, bright natural light flooding the interior, minimalist contemporary architecture, clean lines" width="600" height="400" src="/assets/site-frameless-systems-product-families-image-4.webp" alt="חלונות הזזה פריימלס — חדר חורף מואר">
+        </figure>
+        <div class="pf-card-body">
+          <div class="pf-card-tag">הזזה פריימלס</div>
+          <h3 class="pf-card-title">חלונות הזזה Frameless</h3>
+          <p class="pf-card-desc">פאנלים גדולים של זכוכית טמפרת הנעים על מסלול עליון בלבד — ללא סף תחתון וללא מסגרת נראית לעין. מעניקים מראה של קיר זכוכית אחיד ומושלם, ומתאימים לחדרי חורף, אולמות, ולובי מלונות יוקרה.</p>
+          <div class="pf-card-mechanic">
+            <span class="pf-mechanic-icon" aria-hidden="true">
+              <svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9h12M10 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <span>פתיחה: הזזה על מסלול עליון — ללא סף תחתון</span>
+          </div>
+          <div class="pf-card-uses">
+            <span class="pf-use-tag">חדרי חורף</span>
+            <span class="pf-use-tag">לובי</span>
+            <span class="pf-use-tag">אולמות</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="frameless-systems-mechanism-section" data-layout-spec="מערכות ללא מסגרת-mechanism" dir="rtl">
+  <div class="mechanism-container">
+    <!-- Section Header -->
+    <div class="mechanism-header">
+      <span class="mechanism-label">מנגנוני פעולה</span>
+      <h2 class="mechanism-title">כיצד עובדות מערכות חלונות נאספים ללא מסגרת</h2>
+      <p class="mechanism-subtitle">כל מערכת מתוכננת להעניק גמישות מרבית בשליטה על אוורור, פתח כניסה ורמת הסגירה — תוך שמירה על קו נקי ואסתטיקה אדריכלית חסרת מסגרת.</p>
+    </div>
+
+    <!-- Three Diagram Panels -->
+    <div class="mechanism-grid">
+
+      <!-- Panel 1: Folding/Accordion -->
+      <article class="mechanism-card">
+        <div class="mechanism-diagram">
+          <img data-placeholder="frameless-systems-mechanism-image-1" data-context="Technical architectural diagram illustration showing frameless glass accordion folding window panels in sequence: closed flat, partially folded, fully stacked to one side. Clean line art style on dark charcoal background, teal accent lines showing panel movement, minimal labels, premium architectural drawing aesthetic." width="480" height="280" src="/assets/site-frameless-systems-mechanism-image-1.webp" alt="דיאגרמת מנגנון קיפול חלון אקורדיון ללא מסגרת">
+          <div class="diagram-overlay">
+            <svg data-element-type="icon" data-icon-type="svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="200" height="80">
+              <!-- Accordion fold diagram -->
+              <line x1="180" y1="10" x2="180" y2="70" stroke="#0F7C82" stroke-width="1.5"></line>
+              <line x1="155" y1="10" x2="180" y2="40" stroke="rgba(200,155,60,0.7)" stroke-width="1"></line>
+              <line x1="155" y1="70" x2="180" y2="40" stroke="rgba(200,155,60,0.7)" stroke-width="1"></line>
+              <line x1="130" y1="10" x2="155" y2="40" stroke="rgba(200,155,60,0.7)" stroke-width="1"></line>
+              <line x1="130" y1="70" x2="155" y2="40" stroke="rgba(200,155,60,0.7)" stroke-width="1"></line>
+              <line x1="105" y1="10" x2="130" y2="40" stroke="rgba(200,155,60,0.5)" stroke-width="1"></line>
+              <line x1="105" y1="70" x2="130" y2="40" stroke="rgba(200,155,60,0.5)" stroke-width="1"></line>
+              <line x1="80" y1="10" x2="105" y2="40" stroke="rgba(200,155,60,0.3)" stroke-width="1"></line>
+              <line x1="80" y1="70" x2="105" y2="40" stroke="rgba(200,155,60,0.3)" stroke-width="1"></line>
+              <!-- Arrow indicating direction -->
+              <path d="M60,40 L75,34 L75,46 Z" fill="#0F7C82"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="mechanism-card-body">
+          <div class="mechanism-number">01</div>
+          <h3 class="mechanism-card-title">מערכת קיפול אקורדיון</h3>
+          <p class="mechanism-card-desc">הפאנלים מתקפלים זה אל זה ונאספים לצד אחד או לשני הצדדים, ומפנים פתח רציף ומלא. מתאים לממ"ד, מרפסות ומרחבי מגורים פתוחים. ניתן לעצור בכל נקודה לאוורור חלקי.</p>
+          <ul class="mechanism-specs-list">
+            <li><span class="spec-dot"></span>פתח מרבי עד 100% מרוחב הפתח</li>
+            <li><span class="spec-dot"></span>נאסף לצד אחד או לשני הצדדים</li>
+            <li><span class="spec-dot"></span>ציר תחתון או עילי לפי הצורך</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Panel 2: Stacking/Sliding -->
+      <article class="mechanism-card">
+        <div class="mechanism-diagram">
+          <img data-placeholder="frameless-systems-mechanism-image-2" data-context="Technical architectural diagram of frameless sliding glass panels that stack neatly to the side, shown in three stages: fully closed, partially open, fully stacked open. Dark charcoal background with cool teal and stone accent lines, precise architectural line drawing style, premium minimalist aesthetic showing panel movement arrows." width="480" height="280" src="/assets/site-frameless-systems-mechanism-image-2.webp" alt="דיאגרמת מנגנון הזזה ואיסוף פאנלי זכוכית ללא מסגרת">
+          <div class="diagram-overlay">
+            <svg data-element-type="icon" data-icon-type="svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="200" height="80">
+              <!-- Stacking panels diagram -->
+              <rect x="155" y="10" width="30" height="60" fill="none" stroke="#0F7C82" stroke-width="1.5"></rect>
+              <rect x="118" y="10" width="30" height="60" fill="none" stroke="rgba(200,155,60,0.7)" stroke-width="1"></rect>
+              <rect x="81" y="10" width="30" height="60" fill="none" stroke="rgba(200,155,60,0.5)" stroke-width="1"></rect>
+              <rect x="44" y="10" width="30" height="60" fill="none" stroke="rgba(200,155,60,0.3)" stroke-width="1"></rect>
+              <!-- Stacked panels indicator -->
+              <rect x="155" y="10" width="5" height="60" fill="rgba(15,124,130,0.3)"></rect>
+              <rect x="160" y="10" width="5" height="60" fill="rgba(15,124,130,0.2)"></rect>
+              <rect x="165" y="10" width="5" height="60" fill="rgba(15,124,130,0.1)"></rect>
+              <!-- Arrow -->
+              <path d="M30,40 L15,34 L15,46 Z" fill="rgba(200,155,60,0.8)"></path>
+              <line x1="15" y1="40" x2="44" y2="40" stroke="rgba(200,155,60,0.6)" stroke-width="1" stroke-dasharray="3,2"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="mechanism-card-body">
+          <div class="mechanism-number">02</div>
+          <h3 class="mechanism-card-title">מערכת הזזה פריימלס</h3>
+          <p class="mechanism-card-desc">הפאנלים נעים על מסילה עילית בלבד ונאספים לתוך כיס קיר או לצד הפתח. ללא סף תחתון — מעבר חלק ורצפה רציפה בין פנים לחוץ. מתאים לחיבור בין סלון לחצר ולמרפסות רחבות.</p>
+          <ul class="mechanism-specs-list">
+            <li><span class="spec-dot"></span>ללא סף תחתון — רצפה חלקה לחלוטין</li>
+            <li><span class="spec-dot"></span>מסילה עילית נסתרת בתקרה</li>
+            <li><span class="spec-dot"></span>אפשרות לכיס קיר לאיסוף מלא</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Panel 3: Parking positions / Threshold -->
+      <article class="mechanism-card">
+        <div class="mechanism-diagram">
+          <img data-placeholder="frameless-systems-mechanism-image-3" data-context="Technical architectural cross-section diagram showing frameless glass window parking positions and threshold options: zero threshold flush floor detail, top rail only mounting, and airflow positions. Dark charcoal background, teal and stone line art, architectural drawing style showing installation cross-sections with minimal annotation lines." width="480" height="280" src="/assets/site-frameless-systems-mechanism-image-3.webp" alt="דיאגרמת מיקומי עצירה ואפשרויות סף לחלונות ללא מסגרת">
+          <div class="diagram-overlay">
+            <svg data-element-type="icon" data-icon-type="svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="200" height="80">
+              <!-- Threshold cross-section -->
+              <line x1="20" y1="65" x2="180" y2="65" stroke="rgba(217,222,228,0.4)" stroke-width="1.5"></line>
+              <!-- Panel cross section -->
+              <rect x="85" y="15" width="6" height="50" fill="none" stroke="#0F7C82" stroke-width="1.5"></rect>
+              <!-- Top rail -->
+              <rect x="60" y="12" width="80" height="6" fill="rgba(15,124,130,0.25)" stroke="#0F7C82" stroke-width="1"></rect>
+              <!-- Airflow arrows -->
+              <path d="M50,38 L35,38" stroke="rgba(200,155,60,0.8)" stroke-width="1.2" marker-end="url(#arrow)"></path>
+              <path d="M140,38 L155,38" stroke="rgba(200,155,60,0.8)" stroke-width="1.2"></path>
+              <path d="M155,34 L162,38 L155,42" fill="rgba(200,155,60,0.8)"></path>
+              <!-- Zero threshold indicator -->
+              <line x1="70" y1="65" x2="70" y2="72" stroke="rgba(217,222,228,0.5)" stroke-width="1"></line>
+              <line x1="130" y1="65" x2="130" y2="72" stroke="rgba(217,222,228,0.5)" stroke-width="1"></line>
+              <text x="100" y="78" text-anchor="middle" font-size="7" fill="rgba(217,222,228,0.6)" font-family="Assistant,sans-serif">סף אפס</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mechanism-card-body">
+          <div class="mechanism-number">03</div>
+          <h3 class="mechanism-card-title">מיקומי עצירה ואוורור</h3>
+          <p class="mechanism-card-desc">כל מערכת תומכת במיקומי עצירה מרובים לאורך המסלול, המאפשרים שליטה מדויקת ברמת הפתיחה. ניתן לעצור לאוורור עדין, לפתיחה חלקית לכניסה, או לפתיחה מלאה לחיבור טוטאלי עם החוץ.</p>
+          <ul class="mechanism-specs-list">
+            <li><span class="spec-dot"></span>עצירה בכל נקודה לאורך המסלול</li>
+            <li><span class="spec-dot"></span>סף אפס — מעבר ללא מכשול</li>
+            <li><span class="spec-dot"></span>אוורור מבוקר ללא פגיעה בביטחון</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Specification Note -->
+    <div class="mechanism-spec-note">
+      <div class="spec-note-line"></div>
+      <div class="spec-note-content">
+        <span class="spec-note-icon">
+          <svg data-element-type="icon" data-icon-type="svg" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+            <circle cx="10" cy="10" r="8.5" stroke="#C89B3C" stroke-width="1.2"></circle>
+            <line x1="10" y1="9" x2="10" y2="14" stroke="#C89B3C" stroke-width="1.4"></line>
+            <circle cx="10" cy="6.5" r="0.9" fill="#C89B3C"></circle>
+          </svg>
+        </span>
+        <p class="spec-note-text">כל המערכות מיוצרות בהתאמה אישית לפי מידות הפתח. המסגרות והמסילות מאלומיניום בדרגת אדריכלות — ניתנות לצביעה בכל גוון RAL. עובי הזכוכית, סוג הזיגוג ורמת הבידוד נקבעים בהתאם לדרישות הפרויקט.</p>
+      </div>
+      <div class="spec-note-line"></div>
+    </div>
+  </div>
+
+  <!-- Bottom diagonal divider: charcoal to white with faint brass edge -->
+  <div class="mechanism-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Brass accent line -->
+      <path d="M0,28 L1440,52" stroke="rgba(200,155,60,0.28)" stroke-width="1.5" fill="#FFFFFF"></path>
+      <!-- Main diagonal fill to white/light -->
+      <path d="M0,90 L0,32 L1440,56 L1440,90 Z" fill="#FFFFFF"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="frameless-systems-comparison-section" data-layout-spec="מערכות ללא מסגרת-comparison" dir="rtl">
+  <div class="fsc-container">
+    <div class="fsc-header">
+      <span class="fsc-label">השוואת מערכות</span>
+      <h2 class="fsc-title">איזו מערכת מתאימה לכם?</h2>
+      <p class="fsc-subtitle">חלונות נאספים ללא מסגרת מגיעים במגוון פתרונות — כל אחד מותאם לסוג שונה של מרחב, פתח ואורח חיים. השוואה זו תסייע לכם לבחור את המערכת הנכונה לפרויקט שלכם.</p>
+    </div>
+
+    <div class="fsc-table-wrapper">
+      <table class="fsc-table" role="table">
+        <thead>
+          <tr class="fsc-thead-row">
+            <th class="fsc-th fsc-th-feature" scope="col">קריטריון</th>
+            <th class="fsc-th" scope="col">
+              <div class="fsc-col-header">
+                <span class="fsc-col-icon"><svg data-element-type="icon" data-icon-type="svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h4v18H3zM10 3h4v18h-4zM17 3h4v18h-4z"></path></svg></span>
+                <span class="fsc-col-name">חלונות נאספים<br><small>אקורדיון</small></span>
+              </div>
+            </th>
+            <th class="fsc-th" scope="col">
+              <div class="fsc-col-header">
+                <span class="fsc-col-icon"><svg data-element-type="icon" data-icon-type="svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="0"></rect><line x1="12" y1="3" x2="12" y2="21"></line></svg></span>
+                <span class="fsc-col-name">חלונות מתקפלים<br><small>Fold &amp; Stack</small></span>
+              </div>
+            </th>
+            <th class="fsc-th" scope="col">
+              <div class="fsc-col-header">
+                <span class="fsc-col-icon"><svg data-element-type="icon" data-icon-type="svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="0"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg></span>
+                <span class="fsc-col-name">חלונות הזזה<br><small>Frameless Slide</small></span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="fsc-row">
+            <td class="fsc-td fsc-td-feature">
+              <span class="fsc-feature-label">סגנון פתיחה</span>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-dot fsc-dot-primary"></span>
+                <span>פאנלים מתקפלים לצד אחד או לשני הצדדים, נאספים לחלוטין</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-dot fsc-dot-primary"></span>
+                <span>פאנלים מתקפלים ונאספים לקצה, פתח רחב ופנוי לגמרי</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-dot fsc-dot-primary"></span>
+                <span>לוחות זכוכית נעים על מסילה, הזזה חלקה ושקטה</span>
+              </div>
+            </td>
+          </tr>
+          <tr class="fsc-row fsc-row-alt">
+            <td class="fsc-td fsc-td-feature">
+              <span class="fsc-feature-label">מינימליזם ויזואלי</span>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-badge fsc-badge-high">גבוה מאוד</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-badge fsc-badge-high">גבוה מאוד</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-badge fsc-badge-med">גבוה</span>
+              </div>
+            </td>
+          </tr>
+          <tr class="fsc-row">
+            <td class="fsc-td fsc-td-feature">
+              <span class="fsc-feature-label">רוחב פתח מרבי</span>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-dot fsc-dot-secondary"></span>
+                <span>עד 100% מהפתח — ניתן לפתיחה מלאה</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-dot fsc-dot-secondary"></span>
+                <span>עד 100% מהפתח — פאנלים נאספים לצד</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-dot fsc-dot-secondary"></span>
+                <span>עד 70% מהפתח — חלק מהלוחות חופפים</span>
+              </div>
+            </td>
+          </tr>
+          <tr class="fsc-row fsc-row-alt">
+            <td class="fsc-td fsc-td-feature">
+              <span class="fsc-feature-label">סביבת יישום אידיאלית</span>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-dot fsc-dot-accent"></span>
+                <span>מרפסות, גגות, קירות חזית, מסעדות</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-dot fsc-dot-accent"></span>
+                <span>טרסות פרטיות, בריכות, חללי מגורים פתוחים</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-dot fsc-dot-accent"></span>
+                <span>לובי, חלוקת חלל, חדרי כנסים, חזיתות מסחריות</span>
+              </div>
+            </td>
+          </tr>
+          <tr class="fsc-row">
+            <td class="fsc-td fsc-td-feature">
+              <span class="fsc-feature-label">עמידות בתנאי מזג אוויר</span>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-badge fsc-badge-high">מצוינת</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-badge fsc-badge-high">מצוינת</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-badge fsc-badge-high">מצוינת</span>
+              </div>
+            </td>
+          </tr>
+          <tr class="fsc-row fsc-row-alt">
+            <td class="fsc-td fsc-td-feature">
+              <span class="fsc-feature-label">מסגרת נראית</span>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-check"><svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <span>ללא מסגרת — זכוכית בלבד</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-check"><svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <span>ללא מסגרת — זכוכית בלבד</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-check"><svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <span>ללא מסגרת — זכוכית בלבד</span>
+              </div>
+            </td>
+          </tr>
+          <tr class="fsc-row">
+            <td class="fsc-td fsc-td-feature">
+              <span class="fsc-feature-label">מתאים לפרויקטים</span>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-dot fsc-dot-primary"></span>
+                <span>מגורים ומסחרי כאחד</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-dot fsc-dot-primary"></span>
+                <span>בעיקר מגורים פרטיים ווילות</span>
+              </div>
+            </td>
+            <td class="fsc-td">
+              <div class="fsc-cell-content">
+                <span class="fsc-dot fsc-dot-primary"></span>
+                <span>מסחרי, ציבורי ומשרדים</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="fsc-footer-note">
+      <p>כל המערכות שלנו מיוצרות מזכוכיות מחוסמות עם אחריות מלאה. לא בטוחים איזו מערכת מתאימה לכם? <a href="/contact" class="fsc-link">דברו איתנו</a> ונסייע לכם לבחור.</p>
+    </div>
+  </div>
+
+  <div class="fsc-divider-wrapper" aria-hidden="true">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 L0,32 Q180,18 360,28 T720,20 Q900,14 1080,26 T1440,18 L1440,60 Z" fill="#FFFFFF"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="frameless-systems-applications-section" data-layout-spec="מערכות ללא מסגרת-applications" dir="rtl">
+  <div class="applications-container">
+    <!-- Right: Title Block -->
+    <div class="applications-title-block">
+      <span class="applications-eyebrow">שימושים ויישומים</span>
+      <h2 class="applications-heading">חלונות נאספים לכל סביבה</h2>
+      <div class="applications-accent-line"></div>
+      <p class="applications-intro">מערכות הזכוכית ללא מסגרת שלנו מתאימות למגוון רחב של פרויקטים — מבתים פרטיים ועד מלונות יוקרה. כל סביבה מקבלת פתרון מותאם שמשלב הגנה, פתיחות ואסתטיקה חסרת פשרות.</p>
+      <a href="/contact" class="applications-cta btn-primary">לייעוץ ותכנון</a>
+    </div>
+
+    <!-- Left: Three Panels -->
+    <div class="applications-panels">
+
+      <!-- Panel 1: Private Home -->
+      <article class="application-panel">
+        <div class="panel-image-wrapper">
+          <img data-placeholder="frameless-systems-applications-image-1" data-context="Luxury private home terrace enclosed with floor-to-ceiling frameless folding glass windows, fully open to a lush garden. Clean architectural lines, warm natural light flooding the interior, modern minimalist interior design visible through the transparent glass. No visible frames or borders on the glass panels." width="600" height="400" src="/assets/site-frameless-systems-applications-image-1.webp" alt="בית פרטי עם חלונות נאספים ללא מסגרת הפתוחים לגינה">
+          <div class="panel-tag">בית פרטי</div>
+        </div>
+        <div class="panel-content">
+          <h3 class="panel-title">מרחב מחיה ללא גבולות</h3>
+          <p class="panel-desc">חלונות אקורדיון ללא מסגרת מאפשרים לסלון ולמרפסת להפוך לחלל אחד רציף. הגנה מרוח ומשמש — בלחיצה אחת.</p>
+          <ul class="panel-benefits">
+            <li><span class="benefit-dot"></span>חיבור פנים-חוץ מושלם</li>
+            <li><span class="benefit-dot"></span>הגנה מרוח ומשקעים</li>
+            <li><span class="benefit-dot"></span>מקסימום אור טבעי</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Panel 2: Penthouse Terrace -->
+      <article class="application-panel">
+        <div class="panel-image-wrapper">
+          <img data-placeholder="frameless-systems-applications-image-2" data-context="High-rise penthouse rooftop terrace with panoramic city views, enclosed by fully frameless sliding glass panels. Sleek outdoor lounge furniture, city skyline at golden hour visible through completely transparent borderless glass walls. Premium architectural finish, no visible aluminium frames." width="600" height="400" src="/assets/site-frameless-systems-applications-image-2.webp" alt="מרפסת פנטהאוז עם חלונות הזזה פריימלס ונוף עירוני פנורמי">
+          <div class="panel-tag">פנטהאוז</div>
+        </div>
+        <div class="panel-content">
+          <h3 class="panel-title">נוף פנורמי ללא הפרעה</h3>
+          <p class="panel-desc">וילון זכוכית — מערכת האקורדיון הפריימלס — מעניק לגגות ולמרפסות גבוהות הגנה מלאה תוך שמירה על שקיפות מוחלטת ונוף בלתי מוגבל.</p>
+          <ul class="panel-benefits">
+            <li><span class="benefit-dot"></span>שקיפות 100% ללא מסגרת</li>
+            <li><span class="benefit-dot"></span>עמידות ברוחות גבוהות</li>
+            <li><span class="benefit-dot"></span>פתיחה וסגירה גמישה</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Panel 3: Restaurant / Hospitality -->
+      <article class="application-panel">
+        <div class="panel-image-wrapper">
+          <img data-placeholder="frameless-systems-applications-image-3" data-context="Upscale restaurant or hotel lounge with frameless glass accordion walls fully opened to an outdoor terrace. Elegant table settings, warm ambient lighting, seamless indoor-outdoor dining atmosphere. The glass walls are completely transparent with no visible frames, creating an airy open space that blends interior and exterior." width="600" height="400" src="/assets/site-frameless-systems-applications-image-3.webp" alt="מסעדה יוקרתית עם קיר זכוכיות מתקפלות ללא מסגרת הפתוח לטרסה">
+          <div class="panel-tag">מסעדות ואירוח</div>
+        </div>
+        <div class="panel-content">
+          <h3 class="panel-title">חוויית אירוח ברמה אחרת</h3>
+          <p class="panel-desc">מסעדות, בתי מלון ומרחבי אירוח יוקרתיים משתמשים בזכוכיות מתקפלות ללא מסגרת ליצירת אווירה פתוחה ומזמינה לאורך כל עונות השנה.</p>
+          <ul class="panel-benefits">
+            <li><span class="benefit-dot"></span>אלגנטיות אדריכלית</li>
+            <li><span class="benefit-dot"></span>הסגרה גמישה לפי מזג האוויר</li>
+            <li><span class="benefit-dot"></span>חוויה חזותית ייחודית</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer" dir="rtl">
+  <div class="footer-top">
+    <div class="footer-container">
+      <div class="footer-grid">
+
+        <!-- Column 1: Company Info -->
+        <div class="footer-col footer-brand">
+          <div class="footer-logo-wrap">
+            <img src="/assets/vilon-glass-logo.webp" alt="וילון גלאס Vilon Glass" class="logo">
+          </div>
+          <p class="footer-tagline">מערכות זכוכית ואלומיניום בעיצוב אדריכלי מתקדם — ללא מסגרת, ללא פשרות.</p>
+          <div class="footer-social">
+            <a href="[facebook_handle]" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="[instagram_handle]" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="[whatsapp_handle]" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="footer-col">
+          <h4 class="footer-heading"><span class="heading-accent"></span>ניווט מהיר</h4>
+          <ul class="footer-nav">
+            <li><a href="/frameless-systems">מערכות ללא מסגרת</a></li>
+            <li><a href="/bioclimatic-pergolas">פרגולות ביוקלימטיות</a></li>
+            <li><a href="/projects">פרויקטים</a></li>
+            <li><a href="/contact">צור קשר</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Contact -->
+        <div class="footer-col">
+          <h4 class="footer-heading"><span class="heading-accent"></span>יצירת קשר</h4>
+          <ul class="footer-contact">
+            <li>
+              <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+              <span class="contact-text"><a href="mailto:[business_email]">[business_email]</a></span>
+            </li>
+            <li>
+              <span class="contact-icon"><i class="fas fa-phone"></i></span>
+              <span class="contact-text"><a href="tel:[business_phone]">[business_phone]</a></span>
+            </li>
+            <li><a href="/"><span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+              <span class="contact-text">[business_address]</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: CTA -->
+        <div class="footer-col footer-cta-col">
+          <h4 class="footer-heading"><span class="heading-accent"></span>מוכנים להתחיל?</h4>
+          <p class="footer-cta-text">צרו איתנו קשר לייעוץ ראשוני ללא עלות.</p>
+          <a href="/contact" class="footer-cta-btn">לקבלת הצעת מחיר</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-divider"></div>
+
+  <div class="footer-bottom">
+    <div class="footer-container">
+      <div class="footer-bottom-inner">
+        <p class="footer-copyright">© 2026 וילון גלאס Vilon Glass. כל הזכויות שמורות.</p>
+        <div class="footer-legal">
+          <a href="/privacy">מדיניות פרטיות</a>
+          <span class="legal-sep"></span>
+          <a href="/terms">תנאי שימוש</a>
+          <span class="legal-sep"></span>
+          <a href="/accessibility">נגישות</a>
+          <span class="legal-sep"></span>
+          <a href="https://zappy5.com" target="_blank" class="zappy-attribution">נוצר באמצעות Zappy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <div data-integration="accessibility:toolbar"></div>
+
+    <script src="/script.js"></script>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+
+    <script id="zappy-navbar-scroll-effect">
+    (function(){
+      var nb=document.querySelector('nav.navbar,.navbar:not(.zappy-catalog-menu)');
+      var cm=document.querySelector('.zappy-catalog-menu,#zappy-catalog-menu');
+      if(!nb)return;
+      var fb='rgba(251,251,248,0.85)';
+      var th=60;
+      var rs=getComputedStyle(document.documentElement);
+      var td=rs.getPropertyValue('--text-dark').trim()||'#1a1a1a';
+      var tl=rs.getPropertyValue('--text-light').trim()||'#ffffff';
+      var st=true?td:tl;
+      nb.style.transition='background 0.3s ease,backdrop-filter 0.3s ease,-webkit-backdrop-filter 0.3s ease,box-shadow 0.3s ease';
+      if(cm)cm.style.transition='background 0.3s ease,backdrop-filter 0.3s ease,-webkit-backdrop-filter 0.3s ease';
+      var neSel='a,.navbar-brand,.navbar-brand a,.dropdown-toggle,.mobile-toggle,.phone-header-btn,.mobile-hamburger-btn,.mobile-close-btn,.mobile-submenu-toggle,.nav-link';
+      var skipCls=['cart-link','login-link','nav-search-toggle','search-toggle'];
+      function sTC(c,clr){var els=c.querySelectorAll(neSel);for(var i=0;i<els.length;i++){var sk=false;if(els[i].closest('.sub-menu')||els[i].closest('.dropdown-menu')){sk=true;}for(var j=0;j<skipCls.length;j++){if(els[i].classList.contains(skipCls[j])){sk=true;break;}}if(!sk)els[i].style.setProperty('color',clr,'important');}}
+      function cTC(c){var els=c.querySelectorAll(neSel);for(var i=0;i<els.length;i++){if(els[i].closest('.sub-menu')||els[i].closest('.dropdown-menu'))continue;els[i].style.removeProperty('color');}}
+      function applyScrolled(){
+        nb.classList.add('scrolled');
+        if(window.innerWidth>768){
+          nb.style.setProperty('--frosted-text',st);
+          nb.style.setProperty('background-image','none','important');
+          nb.style.setProperty('background-color',fb,'important');
+          nb.style.backdropFilter='blur(12px)';nb.style.webkitBackdropFilter='blur(12px)';nb.style.boxShadow='0 2px 16px rgba(0,0,0,0.12)';
+          sTC(nb,st);
+        }
+        if(cm){cm.classList.add('scrolled');if(window.innerWidth>768){cm.style.setProperty('background',fb,'important');cm.style.setProperty('backdrop-filter','blur(12px)','important');cm.style.setProperty('-webkit-backdrop-filter','blur(12px)','important');sTC(cm,st);}}
+      }
+      function onS(){
+        if(window._zappyNavNoDarkHero) return;
+        if(window.innerWidth<=768){nb.classList.remove('scrolled');cTC(nb);if(cm){cm.classList.remove('scrolled');cTC(cm);}return;}
+        var y=window.scrollY||window.pageYOffset;
+        if(y>th){
+          nb.classList.add('scrolled');nb.style.setProperty('background-color',fb,'important');nb.style.setProperty('background-image','none','important');
+          nb.style.setProperty('--frosted-text',st);nb.style.backdropFilter='blur(12px)';nb.style.webkitBackdropFilter='blur(12px)';nb.style.boxShadow='0 2px 16px rgba(0,0,0,0.12)';
+          sTC(nb,st);
+          if(cm){cm.classList.add('scrolled');cm.style.setProperty('background',fb,'important');cm.style.setProperty('backdrop-filter','blur(12px)','important');cm.style.setProperty('-webkit-backdrop-filter','blur(12px)','important');sTC(cm,st);}
+        }else{
+          nb.classList.remove('scrolled');nb.style.setProperty('background-color','transparent','important');nb.style.removeProperty('background-image');
+          nb.style.removeProperty('--frosted-text');nb.style.backdropFilter='none';nb.style.webkitBackdropFilter='none';nb.style.boxShadow='none';
+          cTC(nb);
+          if(cm){cm.classList.remove('scrolled');cm.style.setProperty('background','transparent','important');cm.style.setProperty('backdrop-filter','none','important');cm.style.setProperty('-webkit-backdrop-filter','none','important');cTC(cm);}
+        }
+      }
+      function sLum(rv,gv,bv){rv/=255;gv/=255;bv/=255;rv=rv<=0.03928?rv/12.92:Math.pow((rv+0.055)/1.055,2.4);gv=gv<=0.03928?gv/12.92:Math.pow((gv+0.055)/1.055,2.4);bv=bv<=0.03928?bv/12.92:Math.pow((bv+0.055)/1.055,2.4);return 0.2126*rv+0.7152*gv+0.0722*bv;}
+      window.addEventListener('scroll',onS,{passive:true});
+      window.addEventListener('resize',onS,{passive:true});
+      onS();
+      var heroEl=document.querySelector('section[class*="hero"],[data-hero-type],main>section:first-child');
+      var hasDH=false;
+      if(heroEl){var hCs=getComputedStyle(heroEl);var hBI=hCs.backgroundImage;if(hBI&&hBI!=='none'){if(hBI.indexOf('url(')!==-1){var hM2=hCs.backgroundColor.match(/\d+/g);if(hM2&&hM2.length>=3){hasDH=sLum(parseInt(hM2[0]),parseInt(hM2[1]),parseInt(hM2[2]))<0.4;}else{hasDH=true;}}else if(hBI.indexOf('gradient')!==-1){var cM=hBI.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/g);if(cM&&cM.length>0){var tLm=0;for(var ci=0;ci<cM.length;ci++){var pts=cM[ci].match(/\d+/g);tLm+=sLum(parseInt(pts[0]),parseInt(pts[1]),parseInt(pts[2]));}hasDH=(tLm/cM.length)<0.4;}else{hasDH=true;}}else{hasDH=true;}}else{var hM=hCs.backgroundColor.match(/\d+/g);if(hM&&hM.length>=3){hasDH=sLum(parseInt(hM[0]),parseInt(hM[1]),parseInt(hM[2]))<0.4;}}}
+      if(!hasDH){window.removeEventListener('scroll',onS);window.removeEventListener('resize',onS);applyScrolled();window._zappyNavNoDarkHero=true;}
+    })();
+    </script>
+
+    <script id="zappy-mobile-lang-menu-script">
+    (function() {
+      function initMobileLangMenu() {
+        if (window.innerWidth > 768) {
+          var existingMenu = document.querySelector('.mobile-lang-menu');
+          if (existingMenu) existingMenu.remove();
+          return;
+        }
+        if (document.querySelector('.mobile-lang-menu')) return;
+        var switcher = document.querySelector('.lang-switcher');
+        if (!switcher) return;
+        var dropdown = switcher.querySelector('.lang-switcher-dropdown');
+        if (!dropdown) return;
+        var options = dropdown.querySelectorAll('.lang-option');
+        if (options.length === 0) return;
+        var navMenu = document.getElementById('navMenu') || document.querySelector('.nav-menu') || document.querySelector('nav ul');
+        if (!navMenu) return;
+        var currentLang = document.documentElement.lang || 'en';
+        var langConfigs = {
+          he: {name:'עברית',flag:'https://api.iconify.design/circle-flags/il.svg'},
+          en: {name:'English',flag:'https://api.iconify.design/circle-flags/us.svg'},
+          ar: {name:'العربية',flag:'https://api.iconify.design/circle-flags/sa.svg'},
+          fr: {name:'Français',flag:'https://api.iconify.design/circle-flags/fr.svg'},
+          es: {name:'Español',flag:'https://api.iconify.design/circle-flags/es.svg'},
+          de: {name:'Deutsch',flag:'https://api.iconify.design/circle-flags/de.svg'},
+          ru: {name:'Русский',flag:'https://api.iconify.design/circle-flags/ru.svg'},
+          zh: {name:'中文',flag:'https://api.iconify.design/circle-flags/cn.svg'},
+          ja: {name:'日本語',flag:'https://api.iconify.design/circle-flags/jp.svg'},
+          pt: {name:'Português',flag:'https://api.iconify.design/circle-flags/br.svg'},
+          it: {name:'Italiano',flag:'https://api.iconify.design/circle-flags/it.svg'},
+          ko: {name:'한국어',flag:'https://api.iconify.design/circle-flags/kr.svg'}
+        };
+        var container = document.createElement('div');
+        container.className = 'mobile-lang-menu';
+        var currentConfig = langConfigs[currentLang] || {name:currentLang,flag:''};
+        var toggleBtn = document.createElement('button');
+        toggleBtn.className = 'mobile-lang-toggle';
+        toggleBtn.type = 'button';
+        var currentFlagHtml = currentConfig.flag ? '<img src="' + currentConfig.flag + '" width="20" height="20" alt="" style="border-radius:50%;margin-right:8px;margin-left:8px;">' : '';
+        toggleBtn.innerHTML = currentFlagHtml + currentConfig.name;
+        container.appendChild(toggleBtn);
+        var optionsDiv = document.createElement('div');
+        optionsDiv.className = 'mobile-lang-options';
+        var currentLink = document.createElement('a');
+        currentLink.className = 'mobile-lang-option active';
+        currentLink.href = '#';
+        currentLink.innerHTML = currentFlagHtml + currentConfig.name;
+        optionsDiv.appendChild(currentLink);
+        options.forEach(function(opt) {
+          var link = document.createElement('a');
+          link.className = 'mobile-lang-option';
+          link.href = opt.getAttribute('href');
+          link.innerHTML = opt.innerHTML;
+          optionsDiv.appendChild(link);
+        });
+        container.appendChild(optionsDiv);
+        navMenu.appendChild(container);
+        toggleBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleBtn.classList.toggle('expanded');
+          optionsDiv.classList.toggle('expanded');
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileLangMenu); }
+      else { initMobileLangMenu(); }
+      window.addEventListener('resize', function() { clearTimeout(window._mlrt); window._mlrt = setTimeout(initMobileLangMenu, 250); });
+    })();
+    </script>
+</body>
+</html>
