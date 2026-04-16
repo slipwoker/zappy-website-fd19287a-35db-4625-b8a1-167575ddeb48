@@ -2476,9 +2476,8 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   align-items: flex-end;
 }
 
-/* Frosted glass card */
 .index-hero-section .index-hero-card {
-  max-width: 520px;
+  max-width: 600px;
   width: 100%;
   background: rgba(251, 251, 248, 0.10);
   backdrop-filter: blur(18px) saturate(1.4);
@@ -9404,6 +9403,20 @@ body.accessibility-widget-visible ._access-menu {
   color: rgba(251, 251, 248, 0.80);
   text-shadow: 0 1px 8px rgba(0,0,0,0.40);
   display: block;
+}
+
+.index-hero-section .index-hero-card {
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
+.index-hero-section .index-hero-subtitle {
+  overflow: visible !important;
+  white-space: normal !important;
+  text-overflow: unset !important;
+  display: block !important;
+  max-height: none !important;
 }
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
