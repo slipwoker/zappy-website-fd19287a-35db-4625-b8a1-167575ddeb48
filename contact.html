@@ -408,12 +408,12 @@
     // Check if background is transparent or rgba with 0 alpha
     const isTransparent = bgColor === 'transparent' || 
                          bgColor === 'rgba(0, 0, 0, 0)' ||
-                         (bgColor.startsWith('rgba') &amp;&amp; bgColor.includes(', 0)'));
+                         (bgColor.startsWith('rgba') &amp;amp;&amp;amp; bgColor.includes(', 0)'));
     
     if (isTransparent) {
       // Check for background-image or gradient
       const bgImage = computedStyle.backgroundImage;
-      if (bgImage &amp;&amp; bgImage !== 'none') {
+      if (bgImage &amp;amp;&amp;amp; bgImage !== 'none') {
         console.log('[Navbar] Navbar has background image/gradient, using dark text');
         bgColor = 'rgb(240, 240, 240)'; // Assume light background
       } else {
@@ -426,7 +426,7 @@
     
     // Calculate luminance to determine if background is light or dark
     const rgb = bgColor.match(/\d+/g);
-    if (rgb &amp;&amp; rgb.length &gt;= 3) {
+    if (rgb &amp;amp;&amp;amp; rgb.length &amp;gt;= 3) {
       const r = parseInt(rgb[0]);
       const g = parseInt(rgb[1]);
       const b = parseInt(rgb[2]);
@@ -562,7 +562,7 @@
       // ONLY apply inline positioning styles on mobile viewport
       // On desktop, the CSS handles hiding these buttons with display: none
       // Inline styles were breaking desktop layout by overriding CSS
-      const isMobileViewport = window.innerWidth &lt;= 768;
+      const isMobileViewport = window.innerWidth &amp;lt;= 768;
       
       if (mobileToggle) {
         // Icon sizing applies to all viewports for consistency
@@ -753,7 +753,7 @@
       phoneBtn.addEventListener('click', function() {
         // Get phone number from placeholder in page or use default
         const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-        const phoneNumber = phoneLinks.length &gt; 0 
+        const phoneNumber = phoneLinks.length &amp;gt; 0 
           ? phoneLinks[0].getAttribute('href').replace('tel:', '')
           : '[business_phone]';
         
@@ -770,7 +770,7 @@
     const handleWhatsAppVisibility = function() {
       const whatsappBtn = document.querySelector('.whatsapp-float');
       if (whatsappBtn) {
-        const isDesktop = window.innerWidth &gt;= 769;
+        const isDesktop = window.innerWidth &amp;gt;= 769;
         if (isDesktop) {
           whatsappBtn.style.setProperty('display', 'none', 'important');
           whatsappBtn.style.setProperty('visibility', 'hidden', 'important');
@@ -812,7 +812,7 @@
         <span class="eyebrow-label">צרו קשר</span>
       </div>
 
-      <h1 class="contact-intro-heading">בואו נדון בפרויקט<br></br>הזכוכית שלכם</h1>
+      <h1 class="contact-intro-heading">בואו נדון בפרויקט<br></br><br></br>הזכוכית שלכם</h1>
 
       <p class="contact-intro-body">כל פרויקט של חלונות נאספים, וילון זכוכית אקורדיון, או פרגולה ביו-אקלימית מתחיל בשיחה אישית. אנחנו מקשיבים, מגיעים לשטח, ומתכננים פתרון המותאם בדיוק לתנאי המקום ולחזון שלכם — מהייעוץ הראשוני ועד להתקנה מושלמת.</p>
 
@@ -937,7 +937,7 @@
         </div>
         <div class="contact-form-section__field-group">
           <label class="contact-form-section__label-field" for="cf-email">דוא"ל</label>
-          <input class="contact-form-section__input" type="email" id="cf-email" name="email" placeholder="כתובת דוא&amp;quot;ל" required="" autocomplete="email"></input>
+          <input class="contact-form-section__input" type="email" id="cf-email" name="email" placeholder="כתובת דוא&amp;amp;quot;ל" required="" autocomplete="email"></input>
         </div>
         <div class="contact-form-section__field-group">
           <label class="contact-form-section__label-field" for="cf-phone">טלפון</label>
@@ -1065,7 +1065,7 @@
   <div class="footer-bottom">
     <div class="footer-container">
       <div class="footer-bottom-inner">
-        <p class="footer-copyright">© 2026 וילון גלאס Vilon Glass. כל הזכויות שמורות. &amp;nbsp;|&amp;nbsp; מערכות זכוכית ואלומיניום בעיצוב אדריכלי מתקדם — ללא מסגרת, ללא פשרות.</p>
+        <p class="footer-copyright">© 2026 וילון גלאס Vilon Glass. כל הזכויות שמורות. &amp;amp;nbsp;|&amp;amp;nbsp; מערכות זכוכית ואלומיניום בעיצוב אדריכלי מתקדם — ללא מסגרת, ללא פשרות.</p>
         <div class="footer-legal">
           <a href="/privacy">מדיניות פרטיות</a>
           <span class="legal-sep"></span>
