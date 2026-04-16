@@ -9418,6 +9418,15 @@ body.accessibility-widget-visible ._access-menu {
   display: block !important;
   max-height: none !important;
 }
+
+.nav-container {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+}
+
+.nav-right-group {
+  flex-direction: row-reverse !important;
+}
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
