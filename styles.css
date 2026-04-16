@@ -9427,6 +9427,18 @@ body.accessibility-widget-visible ._access-menu {
 .nav-right-group {
   flex-direction: row-reverse !important;
 }
+
+.nav-brand {
+  margin-inline-start: auto !important;
+  margin-inline-end: 0 !important;
+  order: 99 !important;
+}
+
+.nav-right-group {
+  display: flex !important;
+  align-items: center !important;
+  flex: 1 !important;
+}
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
