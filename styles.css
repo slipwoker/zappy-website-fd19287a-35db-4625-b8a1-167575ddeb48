@@ -9390,6 +9390,21 @@ body.accessibility-widget-visible ._access-menu {
 }
 /* /Zappy custom logo size */
 
+
+.index-hero-section .index-hero-subtitle {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 20px;
+  margin-bottom: 0;
+  font-size: 14px;
+  color: rgba(251, 251, 248, 0.80);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.40);
+  display: block;
+}
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
