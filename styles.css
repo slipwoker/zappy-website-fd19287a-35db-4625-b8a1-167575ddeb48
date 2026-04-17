@@ -9379,6 +9379,24 @@ body.accessibility-widget-visible ._access-menu {
     display: none !important;
   }
 }
+
+.navbar .nav-container {
+  direction: ltr;
+}
+
+.navbar .nav-container .nav-right-group {
+  direction: rtl;
+}
+
+.navbar .nav-container .nav-cta-container {
+  margin-left: 0;
+  margin-right: auto;
+  direction: rtl;
+}
+
+.navbar .nav-menu {
+  direction: rtl;
+}
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
