@@ -8510,13 +8510,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 }
 
 
-/* Logo size constraint - enforce max-height only */
-.logo, img.logo, .logo img, .logo-link img, .nav-brand img {
-  max-height: 40px !important;
-  height: auto !important;
-  width: auto !important;
-  object-fit: contain !important;
-}
+
 
 
 /* Hide WhatsApp float button on desktop (mobile-only) */
@@ -9396,6 +9390,45 @@ body.accessibility-widget-visible ._access-menu {
 
 .navbar .nav-menu {
   direction: rtl;
+}
+/* Zappy custom logo size (desktop only — mobile stays at 110px/35px) */
+@media (min-width: 769px) {
+  .logo, img.logo, .logo img, .logo-link img, .nav-brand img {
+    max-height: none !important;
+    height: 60px !important;
+    max-width: 240px !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+  .nav-container {
+    min-height: 90px !important;
+  }
+}
+/* /Zappy custom logo size */
+
+
+.navbar .nav-brand {
+  order: -1 !important;
+  margin-right: 0 !important;
+  margin-left: auto !important;
+  padding-left: 24px !important;
+}
+
+.navbar .nav-cta-container {
+  order: 1 !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+.navbar .nav-menu {
+  order: 0 !important;
+}
+
+.navbar .nav-brand {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(8px) !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
 }
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
