@@ -2428,6 +2428,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   padding-bottom: 72px;
 }
 
+/* Background image layer */
 .index-hero-section .index-hero-bg {
   position: absolute;
   inset: 0;
@@ -2444,22 +2445,21 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   border-radius: 0;
   box-shadow: none;
   border: none;
-  filter: blur(4px);
-  transform: scale(1.05);
-  transform-origin: center center;
 }
 
+/* Scrim overlay */
 .index-hero-section .index-hero-scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background-image: linear-gradient(
+  background-image:
+    linear-gradient(
       to top,
-      rgba(15, 20, 25, 0.92) 0%,
-      rgba(15, 20, 25, 0.72) 35%,
-      rgba(15, 20, 25, 0.42) 65%,
-      rgba(15, 20, 25, 0.22) 100%
+      rgba(15, 20, 25, 0.82) 0%,
+      rgba(15, 20, 25, 0.55) 35%,
+      rgba(15, 20, 25, 0.18) 65%,
+      rgba(15, 20, 25, 0.04) 100%
     );
 }
 
