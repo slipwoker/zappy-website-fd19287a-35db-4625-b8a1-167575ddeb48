@@ -2821,11 +2821,11 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   display: inline-block;
   font-family: 'Rubik', sans-serif;
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--secondary);
-  border: 1px solid rgba(200,155,60,0.35);
+  color: #A07820;
+  border: 1px solid rgba(160,120,32,0.6);
   border-radius: 2px;
   padding: 4px 10px;
   align-self: flex-end;
@@ -2834,9 +2834,9 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 .index-services-section .index-services-card-title {
   font-family: 'Rubik', sans-serif;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.35;
-  color: var(--text-dark);
+  color: #0F1217;
   margin: 0;
 }
 
@@ -2845,7 +2845,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   font-size: 15px;
   font-weight: 400;
   line-height: 1.65;
-  color: var(--text-muted);
+  color: #3A3F48;
   margin: 0;
   flex: 1;
 }
