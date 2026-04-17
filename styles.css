@@ -2476,8 +2476,9 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   align-items: flex-end;
 }
 
+/* Frosted glass card */
 .index-hero-section .index-hero-card {
-  max-width: 600px;
+  max-width: 520px;
   width: 100%;
   background: rgba(251, 251, 248, 0.10);
   backdrop-filter: blur(18px) saturate(1.4);
@@ -8509,7 +8510,13 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 }
 
 
-
+/* Logo size constraint - enforce max-height only */
+.logo, img.logo, .logo img, .logo-link img, .nav-brand img {
+  max-height: 40px !important;
+  height: auto !important;
+  width: auto !important;
+  object-fit: contain !important;
+}
 
 
 /* Hide WhatsApp float button on desktop (mobile-only) */
@@ -9372,75 +9379,6 @@ body.accessibility-widget-visible ._access-menu {
     display: none !important;
   }
 }
-
-
-
-
-
-.index-hero-section .index-hero-subtitle {
-  width: 100%;
-  max-width: 100%;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 20px;
-  margin-bottom: 0;
-  font-size: 14px;
-  color: rgba(251, 251, 248, 0.80);
-  text-shadow: 0 1px 8px rgba(0,0,0,0.40);
-  display: block;
-}
-
-.index-hero-section .index-hero-card {
-  overflow: visible !important;
-  max-height: none !important;
-  height: auto !important;
-}
-
-.index-hero-section .index-hero-subtitle {
-  overflow: visible !important;
-  white-space: normal !important;
-  text-overflow: unset !important;
-  display: block !important;
-  max-height: none !important;
-}
-
-.nav-container {
-  display: flex !important;
-  flex-direction: row-reverse !important;
-}
-
-.nav-right-group {
-  flex-direction: row-reverse !important;
-}
-
-.nav-brand {
-  margin-inline-start: auto !important;
-  margin-inline-end: 0 !important;
-  order: 99 !important;
-}
-
-.nav-right-group {
-  display: flex !important;
-  align-items: center !important;
-  flex: 1 !important;
-}
-/* Zappy custom logo size (desktop only — mobile stays at 110px/35px) */
-@media (min-width: 769px) {
-  .logo, img.logo, .logo img, .logo-link img, .nav-brand img {
-    max-height: none !important;
-    height: 52px !important;
-    max-width: 208px !important;
-    width: auto !important;
-    object-fit: contain !important;
-  }
-  .nav-container {
-    min-height: 82px !important;
-  }
-}
-/* /Zappy custom logo size */
-
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
