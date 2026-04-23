@@ -2447,20 +2447,12 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   border: none;
 }
 
-/* Scrim overlay */
 .index-hero-section .index-hero-scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background-image:
-    linear-gradient(
-      to top,
-      rgba(15, 20, 25, 0.82) 0%,
-      rgba(15, 20, 25, 0.55) 35%,
-      rgba(15, 20, 25, 0.18) 65%,
-      rgba(15, 20, 25, 0.04) 100%
-    );
+  background-image: linear-gradient(to top, rgba(15, 20, 25, 0.95) 0%, rgba(15, 20, 25, 0.78) 35%, rgba(15, 20, 25, 0.45) 65%, rgba(15, 20, 25, 0.18) 100%);
 }
 
 /* Container */
